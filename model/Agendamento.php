@@ -4,8 +4,8 @@
         private $codAgendamento;
         private $codFuncionario;
         private $codUsuario;
-        private $nomeCliente;
-        private $data;
+        private $nomeUsuario;
+        private $dataAgendamento;
         private $confirma;
 
         public function setCodAgendamento($cod) {
@@ -16,11 +16,11 @@
             return $this -> codAgendamento;        
         }
 
-        public function setNomeCliente($nome) {
+        public function setNomeUsuario($nome) {
             $this -> nomeCliente = $nome;
         }
 
-        public function getNomeCliente() {
+        public function getNomeUsuario() {
             return $this -> nomeCliente;        
         }
 
