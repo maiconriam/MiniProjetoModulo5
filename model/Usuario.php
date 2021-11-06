@@ -2,7 +2,9 @@
 
     class Usuario {
         private $codUsuario;
-        private $login;
+        private $nomeUsuario;
+        private $dataNascimento;
+        private $loginUsuario;
         private $senha;
        
         public function setCodUsuario($cod) {
@@ -12,13 +14,21 @@
         public function getCodUsuario() {
             return $this -> codUsuario;
         }
-
-        public function setLogin($login) {
-            $this -> login = $login;
+        
+         public function setNomeUsuario($nome) {
+            $this -> nomeUsuario = $nome;
         }
 
-        public function getLogin() {
-            return $this -> login;
+        public function getNomeUsuario() {
+            return $this -> nomeUsuario;
+        }
+
+        public function setLoginUsuario($login) {
+            $this -> loginUsuario = $login;
+        }
+
+        public function getLoginUsuario() {
+            return $this -> loginUsuario;
         }
 
         public function setSenha($senha) {
