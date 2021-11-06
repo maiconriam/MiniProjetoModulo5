@@ -2,8 +2,7 @@
 
     class Funcionario {
         private $codFuncionario;
-        private $nome;
-        private $login;
+        private $loginFuncionario;
         private $senha;
     
         public function setCodFuncionario($cod) {
@@ -14,20 +13,12 @@
             return $this -> codFuncionario;
         }
 
-        public function setNome($nome) {
-            $this -> nome = $nome;
-        }
-
-        public function getNome() {
-            return $this -> nome;
-        }
-
-        public function setLogin($login) {
-            $this -> login = $login;
+        public function setLoginFuncionario($login) {
+            $this -> loginFuncionario = $login;
         }
 
         public function getLogin() {
-            return $this -> login;
+            return $this -> loginFuncionario;
         }
 
         
