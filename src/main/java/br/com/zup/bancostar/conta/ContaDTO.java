@@ -1,2 +1,4 @@
-package br.com.zup.bancostar.conta;public class ContaDTO {
+package br.com.zup.bancostar.conta;
+
+public class ContaDTO {
 }
