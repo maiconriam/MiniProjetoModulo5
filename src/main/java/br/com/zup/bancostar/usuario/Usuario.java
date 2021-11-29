@@ -1,5 +1,6 @@
 package br.com.zup.bancostar.usuario;
 
+import br.com.zup.bancostar.enuns.Tipo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,6 +1,7 @@
 package br.com.zup.bancostar.operacao;
 
 import br.com.zup.bancostar.conta.Conta;
+import br.com.zup.bancostar.enuns.TipoOperacao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
