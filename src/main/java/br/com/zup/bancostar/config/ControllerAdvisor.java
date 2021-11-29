@@ -1,5 +1,7 @@
 package br.com.zup.bancostar.config;
 
+import br.com.zup.bancostar.exception.CpfJaCadastrado;
+import br.com.zup.bancostar.exception.EmailJaCadastrado;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -25,5 +27,17 @@ public class ControllerAdvisor {
         }
 
         return erros;
+    }
+
+    @ExceptionHandler(EmailJaCadastrado.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public MensagemDeErro manipularErrosDeDuplicidade(EmailJaCadastrado emailJaCadastrado) {
+        return new MensagemDeErro(emailJaCadastrado.getMessage());
+    }
+
+    @ExceptionHandler(CpfJaCadastrado.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public MensagemDeErro manipularErrosDeDuplicidade(CpfJaCadastrado cpfJaCadastrado) {
+        return new MensagemDeErro(cpfJaCadastrado.getMessage());
     }
 }
