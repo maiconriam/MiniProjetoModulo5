@@ -12,12 +12,13 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
-public class ContaDTO {
-
+public class ContaSaidaDTO {
+    @NotNull
+    private Integer id;
     @NotBlank
     private String banco;
     @NotNull
     private Double valor;
-
-
+    @NotBlank
+    private LocalDate dataCriacaoConta;
 }
