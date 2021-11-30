@@ -22,4 +22,14 @@ public class UsuarioController {
         Usuario usuario = modelMapper.map(usuarioDTO, Usuario.class);
         usuarioService.salvarUsuario(usuario);
     }
+
+    @GetMapping("/{cpf}")
+    public Usuario buscarUsuario(@PathVariable String cpf) {
+        return usuarioService.buscarUsuario(cpf);
+    }
+
+    @DeleteMapping("/{cpf}")
+    public void deletarUsuario(@PathVariable String cpf) {
+        usuarioService.deletarUsuario(cpf);
+    }
 }
