@@ -9,6 +9,6 @@ import java.util.Optional;
 
 
 public interface ContaRepository extends CrudRepository <Conta, Integer> {
-    Optional<Conta> findByCpf(String cpf);
+    Optional<Conta> findByUsuarioCpf(String cpf);
 
 }
