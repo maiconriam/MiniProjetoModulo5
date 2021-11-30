@@ -1,5 +1,6 @@
 package br.com.zup.bancostar.config;
 
+import br.com.zup.bancostar.exception.ContaNaoEncontrada;
 import br.com.zup.bancostar.exception.CpfJaCadastrado;
 import br.com.zup.bancostar.exception.EmailJaCadastrado;
 import br.com.zup.bancostar.exception.UsuarioNaoEncontrado;
@@ -46,5 +47,11 @@ public class ControllerAdvisor {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public MensagemDeErro manipularErroDeUsuarioNaoEncontrado(UsuarioNaoEncontrado usuarioNaoEncontrado) {
         return new MensagemDeErro(usuarioNaoEncontrado.getMessage());
+    }
+
+    @ExceptionHandler(ContaNaoEncontrada.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public MensagemDeErro manipularErroDeContaNaoEncontrada(ContaNaoEncontrada contaNaoEncontrada){
+        return new MensagemDeErro(contaNaoEncontrada.getMessage());
     }
 }
