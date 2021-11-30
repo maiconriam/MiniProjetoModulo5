@@ -11,11 +11,21 @@ import java.util.Optional;
 @Service
 public class ContaService {
     @Autowired ContaRepository contaRepository;
-    //@Autowired UsuarioRepository usuarioRepository
+    @Autowired UsuarioRepository usuarioRepository
 
     public Conta cadastrarConta(Conta conta){
        conta.setDataDeCriacao(LocalDate.now());
         return contaRepository.save(conta);
+    }
+    public Conta vincularUsuarioNaConta(Integer id, String cpf){
+        Usuario usuario = usuarioService.buscarUsuario(cpf);
+        Optional<Conta>contaOptional = contaRepository.findById(id);
+
+        if ((contaOptional.isEmpty())){
+            throw new ContaNaoEncontrada();
+        }
+        contaOptional.get().getUsuario().add(usuario);
+        return contaRepository.save(contaOptional.get());
     }
 
     public Conta buscarContaPorCpf(String cpf){
