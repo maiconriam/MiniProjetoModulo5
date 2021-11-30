@@ -1,5 +1,8 @@
 package br.com.zup.bancostar.conta;
 
+import br.com.zup.bancostar.dtos.ContaComUsuarioDTO;
+import br.com.zup.bancostar.dtos.ContaEntradaDTO;
+import br.com.zup.bancostar.dtos.ContaSaidaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +29,9 @@ public class ContaController {
         return contaSaidaDTO;
     }
 
+    @PutMapping
+    public Conta vincularUsuario(@RequestBody ContaComUsuarioDTO contaComUsuarioDTO){
+        return contaService.vincularUsuarioNaConta(contaComUsuarioDTO.getContaId(),contaComUsuarioDTO.getUsuarioId());
+    }
 
 }
