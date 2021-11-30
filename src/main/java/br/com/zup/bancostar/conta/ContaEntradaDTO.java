@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
-public class ContaDTO {
+public class ContaEntradaDTO {
 
     @NotBlank
     private String banco;
