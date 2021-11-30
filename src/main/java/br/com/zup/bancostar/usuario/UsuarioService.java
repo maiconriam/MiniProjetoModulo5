@@ -3,7 +3,6 @@ package br.com.zup.bancostar.usuario;
 import br.com.zup.bancostar.exception.CpfJaCadastrado;
 import br.com.zup.bancostar.exception.EmailJaCadastrado;
 import br.com.zup.bancostar.exception.UsuarioNaoEncontrado;
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

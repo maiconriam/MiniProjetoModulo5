@@ -2,6 +2,7 @@ package br.com.zup.bancostar.usuario;
 
 import br.com.zup.bancostar.usuario.dtos.UsuarioAtualizadoDTO;
 import br.com.zup.bancostar.usuario.dtos.UsuarioDTO;
+import br.com.zup.bancostar.usuario.dtos.UsuarioSaidaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +25,14 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
+    public UsuarioSaidaDTO cadastrarUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
+
+        UsuarioSaidaDTO usuarioSaidaDTO = modelMapper.map(usuarioDTO, UsuarioSaidaDTO.class);
+        usuarioSaidaDTO.setTipoPessoa(usuarioDTO.getTipo().getNomeTipo());
         Usuario usuario = modelMapper.map(usuarioDTO, Usuario.class);
         usuarioService.salvarUsuario(usuario);
+        return usuarioSaidaDTO;
+
     }
 
     @GetMapping("/{cpf}")
