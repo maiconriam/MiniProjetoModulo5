@@ -2,6 +2,7 @@ package br.com.zup.bancostar.config;
 
 import br.com.zup.bancostar.exception.CpfJaCadastrado;
 import br.com.zup.bancostar.exception.EmailJaCadastrado;
+import br.com.zup.bancostar.exception.UsuarioNaoEncontrado;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -39,5 +40,11 @@ public class ControllerAdvisor {
     @ResponseStatus(HttpStatus.CONFLICT)
     public MensagemDeErro manipularErrosDeDuplicidade(CpfJaCadastrado cpfJaCadastrado) {
         return new MensagemDeErro(cpfJaCadastrado.getMessage());
+    }
+
+    @ExceptionHandler(UsuarioNaoEncontrado.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public MensagemDeErro manipularErroDeUsuarioNaoEncontrado(UsuarioNaoEncontrado usuarioNaoEncontrado) {
+        return new MensagemDeErro(usuarioNaoEncontrado.getMessage());
     }
 }
