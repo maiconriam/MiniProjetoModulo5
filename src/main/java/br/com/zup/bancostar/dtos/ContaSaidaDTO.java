@@ -16,7 +16,6 @@ public class ContaSaidaDTO {
 
     @NotBlank
     private String banco;
-    @NotNull
     private double valor;
     @NotBlank
     private LocalDate dataCriacaoConta;
