@@ -1,5 +1,6 @@
 package br.com.zup.bancostar.usuario;
 
+import br.com.zup.bancostar.usuario.dtos.UsuarioAtualizadoDTO;
 import br.com.zup.bancostar.usuario.dtos.UsuarioDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,15 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
-    @Autowired
+
     UsuarioService usuarioService;
-    @Autowired
     ModelMapper modelMapper;
+
+    @Autowired
+    public UsuarioController(UsuarioService usuarioService, ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+        this.usuarioService = usuarioService;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,5 +37,13 @@ public class UsuarioController {
     @DeleteMapping("/{cpf}")
     public void deletarUsuario(@PathVariable String cpf) {
         usuarioService.deletarUsuario(cpf);
+    }
+
+    @PutMapping("/{cpf}")
+    public Usuario atualizarUsuario(@PathVariable String cpf, @RequestBody @Valid UsuarioAtualizadoDTO
+            usuarioAtualizadoDTO) {
+        Usuario usuarioAtualizado = modelMapper.map(usuarioAtualizadoDTO, Usuario.class);
+
+        return usuarioService.atualizarUsuario(cpf, usuarioAtualizado);
     }
 }
