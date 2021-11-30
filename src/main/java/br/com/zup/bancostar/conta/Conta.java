@@ -19,7 +19,7 @@ public class Conta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String banco;
-    private double valor = 0.0;
+    private double valor;
     private LocalDate dataDeCriacao;
     @OneToOne
     private Usuario usuario;
