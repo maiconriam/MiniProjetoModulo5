@@ -34,4 +34,9 @@ public class ContaController {
         return contaService.vincularUsuarioNaConta(contaComUsuarioDTO.getContaId(),contaComUsuarioDTO.getUsuarioId());
     }
 
+    @DeleteMapping("/{id}")
+    public void deletarConta(@PathVariable Integer id){
+        contaService.excluirConta(id);
+    }
+
 }
