@@ -1,4 +1,4 @@
-package br.com.zup.bancostar.conta;
+package br.com.zup.bancostar.dtos;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ public class ContaSaidaDTO {
     @NotBlank
     private String banco;
     @NotNull
-    private Double valor;
+    private double valor;
     @NotBlank
     private LocalDate dataCriacaoConta;
 }
