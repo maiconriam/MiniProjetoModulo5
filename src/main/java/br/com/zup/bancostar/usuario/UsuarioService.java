@@ -3,6 +3,7 @@ package br.com.zup.bancostar.usuario;
 import br.com.zup.bancostar.exception.CpfJaCadastrado;
 import br.com.zup.bancostar.exception.EmailJaCadastrado;
 import br.com.zup.bancostar.exception.UsuarioNaoEncontrado;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,20 @@ public class UsuarioService {
         throw new UsuarioNaoEncontrado("Este Usuario não está cadastrado.");
     }
 
-    public void deletarUsuario(String cpf){
+    public void deletarUsuario(String cpf) {
+        buscarUsuario(cpf);
         usuarioRepository.deleteById(cpf);
+    }
+
+    public Usuario atualizarUsuario(String cpf, Usuario usuario) {
+        Usuario usuarioASerAtualizado = buscarUsuario(cpf);
+
+        usuarioASerAtualizado.setNome(usuario.getNome());
+        usuarioASerAtualizado.setEmail(usuario.getEmail());
+        usuarioASerAtualizado.setTelefone(usuario.getTelefone());
+        usuarioASerAtualizado.setTipo(usuario.getTipo());
+        usuarioRepository.save(usuarioASerAtualizado);
+
+        return usuarioASerAtualizado;
     }
 }
