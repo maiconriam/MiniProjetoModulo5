@@ -46,4 +46,12 @@ public class ContaService {
         throw new RuntimeException("Usuario não encontrado");
     }
 
+    public void excluirConta(Integer id){
+        if (contaRepository.existsById(id)){
+            contaRepository.deleteById(id);
+        }else{
+            throw new ContaNaoEncontrada("Conta não encontrada");
+        }
+    }
+
 }

@@ -52,4 +52,5 @@ public class UsuarioController {
 
         return usuarioService.atualizarUsuario(cpf, usuarioAtualizado);
     }
+
 }
