@@ -13,8 +13,7 @@ import java.time.LocalDate;
 @Setter
 
 public class ContaSaidaDTO {
-    @NotNull
-    private Integer id;
+
     @NotBlank
     private String banco;
     @NotNull
