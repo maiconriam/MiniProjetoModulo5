@@ -1,9 +1,9 @@
 package br.com.zup.bancostar.usuario;
 
+import br.com.zup.bancostar.enuns.Status;
 import br.com.zup.bancostar.exception.CpfJaCadastrado;
 import br.com.zup.bancostar.exception.EmailJaCadastrado;
 import br.com.zup.bancostar.exception.UsuarioNaoEncontrado;
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,7 @@ public class UsuarioService {
 
     public void salvarUsuario(Usuario usuario) {
         if (validarCadastroUsuario(usuario.getEmail(), usuario.getCpf())) {
+            usuario.setStatus(Status.ATIVO);
             usuarioRepository.save(usuario);
         }
     }
@@ -40,19 +41,18 @@ public class UsuarioService {
 
     public Usuario buscarUsuario(String cpf) {
 
-        Optional<Usuario> usuarioId = usuarioRepository.findById(cpf);
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(cpf);
 
-        for (Usuario referencia : usuarioRepository.findAll()) {
-            if (referencia.getCpf().contains(cpf)) {
-                return usuarioId.get();
-            }
+        if (optionalUsuario.isPresent()) {
+            return optionalUsuario.get();
         }
         throw new UsuarioNaoEncontrado("Este Usuario não está cadastrado.");
     }
 
     public void deletarUsuario(String cpf) {
-        buscarUsuario(cpf);
-        usuarioRepository.deleteById(cpf);
+        Usuario usuario = buscarUsuario(cpf);
+        usuario.setStatus(Status.DESATIVADO);
+        usuarioRepository.save(usuario);
     }
 
     public Usuario atualizarUsuario(String cpf, Usuario usuario) {

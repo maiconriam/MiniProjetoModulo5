@@ -1,7 +1,9 @@
 package br.com.zup.bancostar.usuario;
 
+import br.com.zup.bancostar.enuns.Status;
 import br.com.zup.bancostar.usuario.dtos.UsuarioAtualizadoDTO;
 import br.com.zup.bancostar.usuario.dtos.UsuarioDTO;
+import br.com.zup.bancostar.usuario.dtos.UsuarioSaidaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +26,15 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
+    public UsuarioSaidaDTO cadastrarUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
+
+        UsuarioSaidaDTO usuarioSaidaDTO = modelMapper.map(usuarioDTO, UsuarioSaidaDTO.class);
+        usuarioSaidaDTO.setTipoPessoa(usuarioDTO.getTipo().getNomeTipo());
+        usuarioSaidaDTO.setStatus(Status.ATIVO);
         Usuario usuario = modelMapper.map(usuarioDTO, Usuario.class);
         usuarioService.salvarUsuario(usuario);
+        return usuarioSaidaDTO;
+
     }
 
     @GetMapping("/{cpf}")
@@ -35,6 +43,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{cpf}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarUsuario(@PathVariable String cpf) {
         usuarioService.deletarUsuario(cpf);
     }
