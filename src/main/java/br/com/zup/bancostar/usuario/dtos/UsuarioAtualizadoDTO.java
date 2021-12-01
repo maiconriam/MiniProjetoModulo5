@@ -1,29 +1,25 @@
-package br.com.zup.bancostar.usuario;
+package br.com.zup.bancostar.usuario.dtos;
 
-import br.com.zup.bancostar.enuns.Status;
 import br.com.zup.bancostar.enuns.Tipo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "usuario")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Usuario {
-    @Id
-    private String cpf;
+public class UsuarioAtualizadoDTO {
     @Size(min = 4, max = 100, message = "{validacao.nome.size}")
+    @NotBlank(message = "{validacao.obrigatorio}")
     private String nome;
-    @Column(unique = true)
+    @Email
+    @NotBlank(message = "{validacao.obrigatorio}")
     private String email;
+    @NotBlank(message = "{validacao.obrigatorio}")
     private String telefone;
-    @Enumerated(EnumType.STRING)
     private Tipo tipo;
-    @Enumerated(EnumType.STRING)
-    private Status status;
 }
