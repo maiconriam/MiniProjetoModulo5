@@ -23,4 +23,5 @@ public class Operacao {
     private LocalDateTime dataHoraOperacao;
     @ManyToOne
     private Conta conta;
+
 }
