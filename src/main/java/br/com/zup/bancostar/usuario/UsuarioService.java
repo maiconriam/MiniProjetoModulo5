@@ -39,12 +39,10 @@ public class UsuarioService {
 
     public Usuario buscarUsuario(String cpf) {
 
-        Optional<Usuario> usuarioId = usuarioRepository.findById(cpf);
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(cpf);
 
-        for (Usuario referencia : usuarioRepository.findAll()) {
-            if (referencia.getCpf().contains(cpf)) {
-                return usuarioId.get();
-            }
+        if (optionalUsuario.isPresent()) {
+            return optionalUsuario.get();
         }
         throw new UsuarioNaoEncontrado("Este Usuario não está cadastrado.");
     }
