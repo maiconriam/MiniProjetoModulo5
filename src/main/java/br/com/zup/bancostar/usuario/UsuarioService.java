@@ -1,5 +1,6 @@
 package br.com.zup.bancostar.usuario;
 
+import br.com.zup.bancostar.enuns.Status;
 import br.com.zup.bancostar.exception.CpfJaCadastrado;
 import br.com.zup.bancostar.exception.EmailJaCadastrado;
 import br.com.zup.bancostar.exception.UsuarioNaoEncontrado;
@@ -19,6 +20,7 @@ public class UsuarioService {
 
     public void salvarUsuario(Usuario usuario) {
         if (validarCadastroUsuario(usuario.getEmail(), usuario.getCpf())) {
+            usuario.setStatus(Status.ATIVO);
             usuarioRepository.save(usuario);
         }
     }
@@ -48,8 +50,9 @@ public class UsuarioService {
     }
 
     public void deletarUsuario(String cpf) {
-        buscarUsuario(cpf);
-        usuarioRepository.deleteById(cpf);
+        Usuario usuario = buscarUsuario(cpf);
+        usuario.setStatus(Status.DESATIVADO);
+        usuarioRepository.save(usuario);
     }
 
     public Usuario atualizarUsuario(String cpf, Usuario usuario) {

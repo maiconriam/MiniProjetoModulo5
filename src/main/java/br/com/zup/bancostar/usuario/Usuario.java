@@ -1,5 +1,6 @@
 package br.com.zup.bancostar.usuario;
 
+import br.com.zup.bancostar.enuns.Status;
 import br.com.zup.bancostar.enuns.Tipo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +24,6 @@ public class Usuario {
     private String telefone;
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

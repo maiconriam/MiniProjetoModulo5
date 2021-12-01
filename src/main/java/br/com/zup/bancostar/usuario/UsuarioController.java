@@ -1,5 +1,6 @@
 package br.com.zup.bancostar.usuario;
 
+import br.com.zup.bancostar.enuns.Status;
 import br.com.zup.bancostar.usuario.dtos.UsuarioAtualizadoDTO;
 import br.com.zup.bancostar.usuario.dtos.UsuarioDTO;
 import br.com.zup.bancostar.usuario.dtos.UsuarioSaidaDTO;
@@ -29,6 +30,7 @@ public class UsuarioController {
 
         UsuarioSaidaDTO usuarioSaidaDTO = modelMapper.map(usuarioDTO, UsuarioSaidaDTO.class);
         usuarioSaidaDTO.setTipoPessoa(usuarioDTO.getTipo().getNomeTipo());
+        usuarioSaidaDTO.setStatus(Status.ATIVO);
         Usuario usuario = modelMapper.map(usuarioDTO, Usuario.class);
         usuarioService.salvarUsuario(usuario);
         return usuarioSaidaDTO;

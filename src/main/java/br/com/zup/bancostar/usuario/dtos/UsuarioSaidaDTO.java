@@ -1,5 +1,6 @@
 package br.com.zup.bancostar.usuario.dtos;
 
+import br.com.zup.bancostar.enuns.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,5 +25,6 @@ public class UsuarioSaidaDTO {
     @NotBlank(message = "{validacao.obrigatorio}")
     private String telefone;
     private String tipoPessoa;
+    private Status status;
 
 }
