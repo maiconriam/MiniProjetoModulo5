@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -17,7 +16,6 @@ public class ContaSaidaDTO {
     @NotNull(message = "{validacao.obrigatorio}")
     private String banco;
     private double valor;
-    @NotBlank
     private LocalDate dataCriacaoConta;
     private Usuario usuario;
 

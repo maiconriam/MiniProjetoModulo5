@@ -1,4 +1,4 @@
-package br.com.zup.bancostar.conta.dtos;
+package br.com.zup.bancostar.dtos;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

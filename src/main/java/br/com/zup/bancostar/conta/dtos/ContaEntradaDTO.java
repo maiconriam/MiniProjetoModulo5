@@ -14,7 +14,6 @@ public class ContaEntradaDTO {
 
     @NotNull(message = "{validacao.obrigatorio}")
     private String banco;
-    @NotNull
     private double valor;
 
 
