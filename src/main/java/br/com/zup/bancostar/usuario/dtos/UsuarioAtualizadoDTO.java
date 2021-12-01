@@ -17,7 +17,9 @@ public class UsuarioAtualizadoDTO {
     @NotBlank(message = "{validacao.obrigatorio}")
     private String nome;
     @Email
+    @NotBlank(message = "{validacao.obrigatorio}")
     private String email;
+    @NotBlank(message = "{validacao.obrigatorio}")
     private String telefone;
     private Tipo tipo;
 }
