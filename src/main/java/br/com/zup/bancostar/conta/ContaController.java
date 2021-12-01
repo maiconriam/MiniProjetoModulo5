@@ -12,10 +12,14 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/conta")
 public class ContaController {
-    @Autowired
     ContaService contaService;
-    @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    public ContaController(ContaService contaService, ModelMapper modelMapper) {
+        this.contaService = contaService;
+        this.modelMapper = modelMapper;
+    }
 
     @PostMapping
     public ContaSaidaDTO cadastrar(@RequestBody @Valid ContaEntradaDTO contaDTO) {

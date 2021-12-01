@@ -13,13 +13,16 @@ import java.util.Optional;
 
 @Service
 public class ContaService {
-    @Autowired
     ContaRepository contaRepository;
-    @Autowired
     UsuarioRepository usuarioRepository;
-    @Autowired
     UsuarioService usuarioService;
 
+    @Autowired
+    public ContaService(ContaRepository contaRepository, UsuarioRepository usuarioRepository, UsuarioService usuarioService) {
+        this.contaRepository = contaRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.usuarioService = usuarioService;
+    }
 
     public Conta cadastrarConta(Conta conta) {
         conta.setDataDeCriacao(LocalDate.now());
