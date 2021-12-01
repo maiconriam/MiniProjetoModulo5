@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "name")
+@Table(name = "operacao")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -19,10 +19,8 @@ public class Operacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private TipoOperacao tipoOperacao;
-    private Double valor;
-    private LocalDate dataDaOperacao;
-    @OneToOne
-    private Conta contaDeOrigem;
-    @OneToOne
-    private Conta contaDeDestino;
+    private double valor;
+    private LocalDateTime dataHoraOperacao;
+    @ManyToOne
+    private Conta conta;
 }
