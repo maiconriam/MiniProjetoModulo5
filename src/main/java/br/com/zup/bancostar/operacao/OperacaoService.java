@@ -28,4 +28,17 @@ public class OperacaoService {
         }
         throw new RuntimeException("Conta não encontrada");
     }
+
+    public Operacao sacar (Operacao operacao, Integer id){
+        Optional<Conta> conta = contaRepository.findById(id);
+        if(conta.isPresent()){
+            operacao.setDataHoraOperacao(LocalDateTime.now());
+            operacao.setConta(conta.get());
+
+            Operacao operacaoSalva = operacaoRepository.save(operacao);
+            contaRepository.updateValorConta(id, operacao.getValor()*-1);
+            return operacaoSalva;
+        }
+        throw new RuntimeException("Conta não encontrada");
+    }
 }
