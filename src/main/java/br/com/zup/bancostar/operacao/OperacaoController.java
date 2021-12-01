@@ -37,10 +37,22 @@ public class OperacaoController {
         modelMapper.typeMap(Operacao.class, SaidaDTO.class).addMappings(modelMapper -> modelMapper.map(
                 operacao -> operacao.getConta().getId(),SaidaDTO::setConta));
         Operacao operacao = modelMapper.map(entradaDTO, Operacao.class);
-        SaidaDTO saidaDTO = modelMapper.map(operacaoService.depositar(operacao, entradaDTO.getConta()),
+        SaidaDTO saidaDTO = modelMapper.map(operacaoService.sacar(operacao, entradaDTO.getConta()),
                 SaidaDTO.class);
 
         return saidaDTO;
     }
 
+    @Transactional
+    @PostMapping("/transferir")
+    public SaidaDTO transferir (@RequestBody EntradaDTO entradaDTO){
+        modelMapper.typeMap(Operacao.class, SaidaDTO.class).addMappings(modelMapper -> modelMapper.map(
+                operacao -> operacao.getConta().getId(),SaidaDTO::setConta));
+        Operacao operacao = modelMapper.map(entradaDTO, Operacao.class);
+        SaidaDTO saidaDTO = modelMapper.map(operacaoService.transferir(operacao, entradaDTO.getConta(),
+                        entradaDTO.getContaDestino()),
+                SaidaDTO.class);
+
+        return saidaDTO;
+    }
 }

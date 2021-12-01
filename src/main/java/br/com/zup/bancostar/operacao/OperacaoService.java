@@ -41,4 +41,19 @@ public class OperacaoService {
         }
         throw new RuntimeException("Conta não encontrada");
     }
+
+    public Operacao transferir (Operacao operacao, Integer idConta, Integer idContaDestino){
+        Optional<Conta> contaOrigem = contaRepository.findById(idConta);
+        Optional<Conta> contaDestino = contaRepository.findById(idContaDestino);
+        if(contaOrigem.isPresent() && contaDestino.isPresent()){
+            operacao.setDataHoraOperacao(LocalDateTime.now());
+            operacao.setConta(contaOrigem.get());
+
+            Operacao operacaoSalva = operacaoRepository.save(operacao);
+            contaRepository.updateValorConta(idConta, operacao.getValor()*-1);
+            contaRepository.updateValorConta(idContaDestino, operacao.getValor());
+            return operacaoSalva;
+        }
+        throw new RuntimeException("Conta não encontrada");
+    }
 }
