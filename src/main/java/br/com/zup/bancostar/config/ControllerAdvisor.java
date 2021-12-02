@@ -1,9 +1,6 @@
 package br.com.zup.bancostar.config;
 
-import br.com.zup.bancostar.exception.ContaNaoEncontrada;
-import br.com.zup.bancostar.exception.CpfJaCadastrado;
-import br.com.zup.bancostar.exception.EmailJaCadastrado;
-import br.com.zup.bancostar.exception.UsuarioNaoEncontrado;
+import br.com.zup.bancostar.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -60,5 +57,11 @@ public class ControllerAdvisor {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public MensagemDeErro manipularErroDeContaNaoEncontrada(ContaNaoEncontrada contaNaoEncontrada) {
         return new MensagemDeErro(contaNaoEncontrada.getMessage());
+    }
+
+    @ExceptionHandler(ContaDesativada.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public MensagemDeErro manipularErroDeContaDesativa(ContaDesativada contaDesativada) {
+        return new MensagemDeErro(contaDesativada.getMessage());
     }
 }
