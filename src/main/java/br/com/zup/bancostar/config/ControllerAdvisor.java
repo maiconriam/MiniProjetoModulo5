@@ -66,8 +66,14 @@ public class ControllerAdvisor {
     }
 
     @ExceptionHandler(SaldoInsuficiente.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public MensagemDeErro manipularErroDeSaldoInsuficiente(SaldoInsuficiente saldoInsuficiente) {
         return new MensagemDeErro(saldoInsuficiente.getMessage());
+    }
+
+    @ExceptionHandler(ContaRepetida.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public MensagemDeErro manipularErroDeContaRepetida(ContaRepetida contaRepetida) {
+        return new MensagemDeErro(contaRepetida.getMessage());
     }
 }
