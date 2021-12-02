@@ -26,17 +26,16 @@ public class OperacaoService {
 
     public Operacao registrarOperacao(TipoOperacao tipoOperacao, double valor, Integer conta, Integer contaDestino) {
         if(tipoOperacao.equals(TipoOperacao.DEPOSITO)){
-            this.depositar(valor, conta);
+            return this.depositar(valor, conta);
         }
         else if(tipoOperacao.equals(TipoOperacao.SAQUE)){
-            this.sacar(valor, conta);
+            return this.sacar(valor, conta);
         }
         else if(tipoOperacao.equals(TipoOperacao.TRANSFERENCIA)){
-            this.transferir(valor, conta, contaDestino);
+            return this.transferir(valor, conta, contaDestino);
         }
 
         throw new OperacaoNaoPermitida("Operação não permitida");
-
     }
 
     public Operacao depositar (double valor, Integer id){
@@ -46,7 +45,6 @@ public class OperacaoService {
         contaRepository.updateValorConta(id, operacaoSalva.getValor());
 
         return operacaoSalva;
-
     }
 
     public Operacao sacar (double valor, Integer id){
@@ -105,5 +103,6 @@ public class OperacaoService {
             throw new SaldoInsuficiente("Saldo insuficiente");
         }
     }
+
 }
 
