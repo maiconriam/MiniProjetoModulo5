@@ -3,6 +3,7 @@ package br.com.zup.bancostar.operacao;
 import br.com.zup.bancostar.conta.Conta;
 import br.com.zup.bancostar.conta.ContaRepository;
 import br.com.zup.bancostar.conta.ContaService;
+import br.com.zup.bancostar.enuns.TipoOperacao;
 import br.com.zup.bancostar.exception.ContaRepetida;
 import br.com.zup.bancostar.exception.SaldoInsuficiente;
 import br.com.zup.bancostar.extrato.ExtratoService;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class OperacaoService {
@@ -23,6 +23,22 @@ public class OperacaoService {
     @Autowired
     private ContaService contaService;
 
+    public Operacao registrarOperacao(TipoOperacao tipoOperacao, double valor, Integer conta, Integer contaDestino) {
+        switch (tipoOperacao){
+            case DEPOSITO:
+
+
+            case SAQUE:
+
+
+            case TRANSFERENCIA:
+
+
+            default:
+                throw new RuntimeException("Operacao não permitida");
+        }
+
+    }
 
     public Operacao depositar (Operacao operacao, Integer id){
         Conta conta = contaService.buscaContaValida(id);
