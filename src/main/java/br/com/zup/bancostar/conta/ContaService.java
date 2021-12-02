@@ -2,6 +2,7 @@ package br.com.zup.bancostar.conta;
 
 import br.com.zup.bancostar.enuns.Status;
 import br.com.zup.bancostar.exception.ContaNaoEncontrada;
+import br.com.zup.bancostar.exception.UsuarioStatusDesativado;
 import br.com.zup.bancostar.usuario.Usuario;
 import br.com.zup.bancostar.usuario.UsuarioRepository;
 import br.com.zup.bancostar.usuario.UsuarioService;
@@ -31,14 +32,15 @@ public class ContaService {
 
     public Conta vincularUsuarioNaConta(Integer id, String cpf) {
         Usuario usuario = usuarioService.buscarUsuario(cpf);
-        Optional<Conta> contaOptional = contaRepository.findById(id);
-
-        if ((contaOptional.isEmpty())) {
-            throw new ContaNaoEncontrada("Conta não encontrada");
+        if (usuario.getStatus().equals(Status.ATIVO)) {
+            Optional<Conta> contaOptional = contaRepository.findById(id);
+            if ((contaOptional.isEmpty())) {
+                throw new ContaNaoEncontrada("Conta não encontrada");
+            }
+            contaOptional.get().setUsuario(usuario);
+            return contaRepository.save(contaOptional.get());
         }
-        contaOptional.get().setUsuario(usuario);
-
-        return contaRepository.save(contaOptional.get());
+        throw new UsuarioStatusDesativado("Este Usuario está Desativado. Ative-o para seguir com este processo.");
     }
 
     public Conta buscarContaPorCpf(String cpf) {
