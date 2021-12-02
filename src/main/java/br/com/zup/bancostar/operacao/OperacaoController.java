@@ -1,13 +1,11 @@
 package br.com.zup.bancostar.operacao;
 
 import br.com.zup.bancostar.operacao.dto.EntradaDTO;
+import br.com.zup.bancostar.operacao.dto.ExtratoDTO;
 import br.com.zup.bancostar.operacao.dto.SaidaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 
@@ -20,39 +18,19 @@ public class OperacaoController {
     ModelMapper modelMapper;
 
     @Transactional
-    @PostMapping("/depositar")
-    public SaidaDTO depositar (@RequestBody EntradaDTO entradaDTO){
+    @PostMapping
+    public SaidaDTO registrarOperacao (@RequestBody EntradaDTO entradaDTO){
         modelMapper.typeMap(Operacao.class, SaidaDTO.class).addMappings(modelMapper -> modelMapper.map(
                 operacao -> operacao.getConta().getId(),SaidaDTO::setConta));
-        Operacao operacao = modelMapper.map(entradaDTO, Operacao.class);
-        SaidaDTO saidaDTO = modelMapper.map(operacaoService.depositar(operacao, entradaDTO.getConta()),
+        SaidaDTO saidaDTO = modelMapper.map(operacaoService.registrarOperacao(entradaDTO.getTipoOperacao(), entradaDTO.getValor(),
+                        entradaDTO.getConta(), entradaDTO.getContaDestino()),
                 SaidaDTO.class);
 
         return saidaDTO;
     }
 
-    @Transactional
-    @PostMapping("/sacar")
-    public SaidaDTO sacar (@RequestBody EntradaDTO entradaDTO){
-        modelMapper.typeMap(Operacao.class, SaidaDTO.class).addMappings(modelMapper -> modelMapper.map(
-                operacao -> operacao.getConta().getId(),SaidaDTO::setConta));
-        Operacao operacao = modelMapper.map(entradaDTO, Operacao.class);
-        SaidaDTO saidaDTO = modelMapper.map(operacaoService.sacar(operacao, entradaDTO.getConta()),
-                SaidaDTO.class);
-
-        return saidaDTO;
-    }
-
-    @Transactional
-    @PostMapping("/transferir")
-    public SaidaDTO transferir (@RequestBody EntradaDTO entradaDTO){
-        modelMapper.typeMap(Operacao.class, SaidaDTO.class).addMappings(modelMapper -> modelMapper.map(
-                operacao -> operacao.getConta().getId(),SaidaDTO::setConta));
-        Operacao operacao = modelMapper.map(entradaDTO, Operacao.class);
-        SaidaDTO saidaDTO = modelMapper.map(operacaoService.transferir(operacao, entradaDTO.getConta(),
-                        entradaDTO.getContaDestino()),
-                SaidaDTO.class);
-
-        return saidaDTO;
+    @GetMapping
+    public ExtratoDTO extrato(@RequestParam(name = "idConta") Integer id){
+        return operacaoService.extrato(id);
     }
 }
