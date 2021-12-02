@@ -1,6 +1,7 @@
 package br.com.zup.bancostar.conta;
 
 import br.com.zup.bancostar.enuns.Status;
+import br.com.zup.bancostar.exception.ContaDesativada;
 import br.com.zup.bancostar.exception.ContaNaoEncontrada;
 import br.com.zup.bancostar.usuario.Usuario;
 import br.com.zup.bancostar.usuario.UsuarioRepository;
@@ -56,4 +57,13 @@ public class ContaService {
         contaRepository.save(conta);
     }
 
+    public Conta buscaContaValida(Integer id){
+        Conta conta = contaRepository.findById(id).orElseThrow(
+                () -> new ContaNaoEncontrada("Conta não encontrada")
+        );
+        if(conta.getUsuario().getStatus().equals(Status.ATIVO)){
+            return conta;
+        }
+        throw new ContaDesativada("Conta desativa, por favor procure seu gerente");
+    }
 }
