@@ -76,4 +76,10 @@ public class ControllerAdvisor {
     public MensagemDeErro manipularErroDeContaRepetida(ContaRepetida contaRepetida) {
         return new MensagemDeErro(contaRepetida.getMessage());
     }
+
+    @ExceptionHandler(OperacaoNaoPermitida.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public MensagemDeErro manipularErroDeOperacaoNaoPermitida(OperacaoNaoPermitida operacaoNaoPermitida) {
+        return new MensagemDeErro(operacaoNaoPermitida.getMessage());
+    }
 }
