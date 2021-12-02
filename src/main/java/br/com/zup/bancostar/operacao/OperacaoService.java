@@ -5,8 +5,8 @@ import br.com.zup.bancostar.conta.ContaRepository;
 import br.com.zup.bancostar.conta.ContaService;
 import br.com.zup.bancostar.enuns.TipoOperacao;
 import br.com.zup.bancostar.exception.ContaRepetida;
+import br.com.zup.bancostar.exception.OperacaoNaoPermitida;
 import br.com.zup.bancostar.exception.SaldoInsuficiente;
-import br.com.zup.bancostar.extrato.ExtratoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,24 +19,20 @@ public class OperacaoService {
     @Autowired
     private ContaRepository contaRepository;
     @Autowired
-    private ExtratoService extratoService;
-    @Autowired
     private ContaService contaService;
 
     public Operacao registrarOperacao(TipoOperacao tipoOperacao, double valor, Integer conta, Integer contaDestino) {
-        switch (tipoOperacao){
-            case DEPOSITO:
-
-
-            case SAQUE:
-
-
-            case TRANSFERENCIA:
-
-
-            default:
-                throw new RuntimeException("Operacao não permitida");
+        if(tipoOperacao.equals(TipoOperacao.DEPOSITO)){
+            this.depositar(valor, conta);
         }
+        else if(tipoOperacao.equals(TipoOperacao.SAQUE)){
+            this.sacar(valor, conta);
+        }
+        else if(tipoOperacao.equals(TipoOperacao.TRANSFERENCIA)){
+            this.transferir(valor, conta, contaDestino);
+        }
+
+        throw new OperacaoNaoPermitida("Operação não permitida");
 
     }
 
