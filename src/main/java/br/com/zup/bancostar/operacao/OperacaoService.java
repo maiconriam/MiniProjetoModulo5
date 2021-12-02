@@ -63,6 +63,13 @@ public class OperacaoService {
             Operacao operacaoSalva = operacaoRepository.save(operacao);
             contaRepository.updateValorConta(idConta, operacao.getValor()*-1);
             contaRepository.updateValorConta(idContaDestino, operacao.getValor());
+
+            double saldoExtratoOrigem = contaOrigem.get().getValor() - operacao.getValor();
+            extratoService.novoExtrato(operacao, contaOrigem.get(), saldoExtratoOrigem);
+
+            double saldoExtratoDestino = contaDestino.get().getValor() + operacao.getValor();
+            extratoService.novoExtrato(operacao, contaDestino.get(), saldoExtratoDestino);
+
             return operacaoSalva;
         }
         throw new RuntimeException("Conta não encontrada");
