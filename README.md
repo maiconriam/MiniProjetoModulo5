@@ -21,9 +21,14 @@ Aplicação que simula uma API de um banco, permitindo o cadastro de usuários e
 
 - JAVA JDK
 - Maven
+- MariaDB/MySQL
 
-Após instalar the dependencias através do terminal na pasta do projeto, execute o seguinte comando:
-(verificar como faz)
+>Link para instalar o Maven:
+
+https://maven.apache.org/download.cgi
+
+Após instalar as dependencias através do terminal na pasta do projeto, execute o seguinte comando:
+
 
 Voce deve agora ser capaz de iniciar a aplicaçao na IDE. Será possível testar a aplicaçao em: localhost:8080/
 
