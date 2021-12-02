@@ -3,6 +3,7 @@ package br.com.zup.bancostar.operacao;
 import br.com.zup.bancostar.conta.Conta;
 import br.com.zup.bancostar.conta.ContaRepository;
 import br.com.zup.bancostar.conta.ContaService;
+import br.com.zup.bancostar.exception.ContaRepetida;
 import br.com.zup.bancostar.exception.SaldoInsuficiente;
 import br.com.zup.bancostar.extrato.ExtratoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,10 @@ public class OperacaoService {
         Conta contaOrigem = contaService.buscaContaValida(idConta);
         Conta contaDestino = contaService.buscaContaValida(idContaDestino);
         verificarSaldo(contaOrigem, operacao.getValor());
+        if (contaOrigem.equals(contaDestino)) {
+            throw new ContaRepetida("Você nao pode transferir para a mesma conta");
+        }
+
         operacao.setDataHoraOperacao(LocalDateTime.now());
         operacao.setConta(contaOrigem);
 
