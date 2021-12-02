@@ -56,4 +56,9 @@ public class UsuarioController {
         return usuarioService.atualizarUsuario(cpf, usuarioAtualizado);
     }
 
+    @PutMapping("/reative/{cpf}")
+    public Usuario reativarOUsuario(@PathVariable String cpf) {
+        return usuarioService.reativarUsuario(cpf);
+    }
+
 }

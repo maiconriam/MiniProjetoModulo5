@@ -7,6 +7,8 @@ import br.com.zup.bancostar.exception.UsuarioNaoEncontrado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 import java.util.Optional;
 
 @Service
@@ -65,5 +67,13 @@ public class UsuarioService {
         usuarioRepository.save(usuarioASerAtualizado);
 
         return usuarioASerAtualizado;
+    }
+
+    public Usuario reativarUsuario(String cpf) {
+        Usuario usuario = buscarUsuario(cpf);
+
+        usuario.setStatus(Status.ATIVO);
+        usuarioRepository.save(usuario);
+        return usuario;
     }
 }

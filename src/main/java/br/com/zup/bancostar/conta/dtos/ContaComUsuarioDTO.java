@@ -14,5 +14,4 @@ public class ContaComUsuarioDTO {
     private String usuarioId;
     private Integer contaId;
 
-
 }
