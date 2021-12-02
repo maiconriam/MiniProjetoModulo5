@@ -50,17 +50,12 @@ public class OperacaoService {
 
     }
 
-    public Operacao sacar (Operacao operacao, Integer id){
+    public Operacao sacar (double valor, Integer id){
         Conta conta = contaService.buscaContaValida(id);
-        verificarSaldo(conta, operacao.getValor());
-        operacao.setDataHoraOperacao(LocalDateTime.now());
-        operacao.setConta(conta);
+        verificarSaldo(conta, valor);
 
-        Operacao operacaoSalva = operacaoRepository.save(operacao);
-        contaRepository.updateValorConta(id, operacao.getValor());
-
-        double saldoExtrato = conta.getValor()+ operacao.getValor()* -1;
-        extratoService.novoExtrato(operacao, operacao.getConta(), saldoExtrato);
+        Operacao operacaoSalva = this.salvarOperacao(TipoOperacao.SAQUE, valor, conta);
+        contaRepository.updateValorConta(id, operacaoSalva.getValor() * - 1);
 
         return operacaoSalva;
     }
