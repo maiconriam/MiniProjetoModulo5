@@ -8,7 +8,6 @@ import br.com.zup.bancostar.usuario.UsuarioRepository;
 import br.com.zup.bancostar.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -48,6 +47,7 @@ public class ContaService {
         if (optionalUsuario.isPresent()) {
             Optional<Conta> optionalConta = contaRepository.findByUsuarioCpf(optionalUsuario.get().getCpf());
             if (optionalConta.isPresent()) {
+
                 return optionalConta.get();
             }
             throw new RuntimeException("Conta não encontrada");
