@@ -27,12 +27,15 @@ Aplicação que simula uma API de um banco, permitindo o cadastro de usuários e
 
 https://maven.apache.org/download.cgi
 
-Após instalar as dependencias através do terminal na pasta do projeto, execute o seguinte comando:
+Após instalar as dependencias através do terminal na pasta do projeto voce deve agora ser capaz de iniciar a aplicaçao na IDE. 
 
-
-Voce deve agora ser capaz de iniciar a aplicaçao na IDE. Será possível testar a aplicaçao em: localhost:8080/
+Será possível testar a aplicaçao em: localhost:8080/
 
 
 #UML
 
+![uml_miniProjetoM5](https://user-images.githubusercontent.com/81029547/144488826-0312f99f-00c8-4fa0-8001-e4309ee0c7ef.png)
 
+#SERVIÇOS
+
+(Link Swagger)
