@@ -2,10 +2,15 @@ package br.com.zup.bancostar.operacao;
 
 import br.com.zup.bancostar.conta.Conta;
 import br.com.zup.bancostar.conta.ContaRepository;
+import br.com.zup.bancostar.extrato.Extrato;
+import br.com.zup.bancostar.extrato.ExtratoRepository;
+import br.com.zup.bancostar.extrato.ExtratoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,7 +19,8 @@ public class OperacaoService {
     private OperacaoRepository operacaoRepository;
     @Autowired
     private ContaRepository contaRepository;
-
+    @Autowired
+    private ExtratoService extratoService;
 
     public Operacao depositar (Operacao operacao, Integer id){
         Optional<Conta> optionalOperacao = contaRepository.findById(id);
@@ -24,6 +30,10 @@ public class OperacaoService {
 
             Operacao operacaoSalva = operacaoRepository.save(operacao);
             contaRepository.updateValorConta(id, operacao.getValor());
+
+            double saldoExtrato = optionalOperacao.get().getValor()+ operacao.getValor();
+
+            extratoService.novoExtrato(operacao, operacao.getConta(), saldoExtrato);
             return operacaoSalva;
         }
         throw new RuntimeException("Conta não encontrada");
@@ -37,6 +47,10 @@ public class OperacaoService {
 
             Operacao operacaoSalva = operacaoRepository.save(operacao);
             contaRepository.updateValorConta(id, operacao.getValor()*-1);
+
+            double saldoExtrato = conta.get().getValor() - operacao.getValor();
+            extratoService.novoExtrato(operacao, operacao.getConta(), saldoExtrato);
+
             return operacaoSalva;
         }
         throw new RuntimeException("Conta não encontrada");
@@ -52,8 +66,17 @@ public class OperacaoService {
             Operacao operacaoSalva = operacaoRepository.save(operacao);
             contaRepository.updateValorConta(idConta, operacao.getValor()*-1);
             contaRepository.updateValorConta(idContaDestino, operacao.getValor());
+
+            double saldoExtratoOrigem = contaOrigem.get().getValor() - operacao.getValor();
+            extratoService.novoExtrato(operacao, contaOrigem.get(), saldoExtratoOrigem);
+
+            double saldoExtratoDestino = contaDestino.get().getValor() + operacao.getValor();
+            extratoService.novoExtrato(operacao, contaDestino.get(), saldoExtratoDestino);
+
             return operacaoSalva;
         }
         throw new RuntimeException("Conta não encontrada");
     }
+
+
 }

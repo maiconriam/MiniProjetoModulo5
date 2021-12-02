@@ -19,9 +19,10 @@ public class Extrato {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
-    @ManyToOne
-    private List<Operacao>operacoes;
+    private double saldo;
     @ManyToOne
     private Conta conta;
+    @ManyToOne
+    private Operacao operacaos;
 
 }

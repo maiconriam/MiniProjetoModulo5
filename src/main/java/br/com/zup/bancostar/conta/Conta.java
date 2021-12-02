@@ -25,6 +25,4 @@ public class Conta {
     private LocalDate dataDeCriacao;
     @OneToOne
     private Usuario usuario;
-    @OneToMany
-    private List<Extrato> extrato;
 }
