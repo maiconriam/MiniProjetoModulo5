@@ -60,28 +60,21 @@ public class OperacaoService {
         return operacaoSalva;
     }
 
-    public Operacao transferir (Operacao operacao, Integer idConta, Integer idContaDestino){
+    public Operacao transferir (double valor, Integer idConta, Integer idContaDestino){
         Conta contaOrigem = contaService.buscaContaValida(idConta);
         Conta contaDestino = contaService.buscaContaValida(idContaDestino);
-        verificarSaldo(contaOrigem, operacao.getValor());
+        verificarSaldo(contaOrigem,valor);
         if (contaOrigem.equals(contaDestino)) {
             throw new ContaRepetida("Você nao pode transferir para a mesma conta");
         }
 
-        operacao.setDataHoraOperacao(LocalDateTime.now());
-        operacao.setConta(contaOrigem);
+        Operacao operacaoOrigemSalva = this.salvarOperacao(TipoOperacao.TRANSFERENCIA, valor, contaOrigem);
+        contaRepository.updateValorConta(idConta, operacaoOrigemSalva.getValor() * - 1);
 
-        Operacao operacaoSalva = operacaoRepository.save(operacao);
-        contaRepository.updateValorConta(idConta, operacao.getValor()*-1);
-        contaRepository.updateValorConta(idContaDestino, operacao.getValor());
+        Operacao operacaoDestinoSalva = this.salvarOperacao(TipoOperacao.TRANSFERENCIA, valor, contaDestino);
+        contaRepository.updateValorConta(idContaDestino, operacaoDestinoSalva.getValor());
 
-        double saldoExtratoOrigem = contaOrigem.getValor() - operacao.getValor();
-        extratoService.novoExtrato(operacao, contaOrigem, saldoExtratoOrigem);
-
-        double saldoExtratoDestino = contaDestino.getValor() + operacao.getValor();
-        extratoService.novoExtrato(operacao, contaDestino, saldoExtratoDestino);
-
-        return operacaoSalva;
+        return operacaoOrigemSalva;
     }
 
     private Operacao salvarOperacao(TipoOperacao tipoOperacao, double valor, Conta conta){
