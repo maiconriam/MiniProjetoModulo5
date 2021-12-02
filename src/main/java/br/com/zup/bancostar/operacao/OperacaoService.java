@@ -4,13 +4,16 @@ import br.com.zup.bancostar.conta.Conta;
 import br.com.zup.bancostar.conta.ContaRepository;
 import br.com.zup.bancostar.conta.ContaService;
 import br.com.zup.bancostar.enuns.TipoOperacao;
+import br.com.zup.bancostar.exception.ContaNaoEncontrada;
 import br.com.zup.bancostar.exception.ContaRepetida;
 import br.com.zup.bancostar.exception.OperacaoNaoPermitida;
 import br.com.zup.bancostar.exception.SaldoInsuficiente;
+import br.com.zup.bancostar.operacao.dto.ExtratoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OperacaoService {
@@ -71,6 +74,20 @@ public class OperacaoService {
         contaRepository.updateValorConta(idContaDestino, operacaoDestinoSalva.getValor());
 
         return operacaoOrigemSalva;
+    }
+
+    public ExtratoDTO extrato(Integer id) {
+        Conta conta = contaRepository.findById(id).orElseThrow(
+                () -> new ContaNaoEncontrada("Conta não encontrada")
+        );
+        List<Operacao> operacoes = operacaoRepository.findAllByContaId(id);
+        ExtratoDTO extratoDTO = new ExtratoDTO();
+        extratoDTO.setSaldo(conta.getValor());
+        for(Operacao operacao : operacoes){
+            extratoDTO.getOperacoes().add(new ExtratoDTO.ExtratoDataDTO(operacao.getTipoOperacao(), operacao.getValor(),
+                    operacao.getDataHoraOperacao()));
+        }
+        return extratoDTO;
     }
 
     private Operacao salvarOperacao(TipoOperacao tipoOperacao, double valor, Conta conta){
