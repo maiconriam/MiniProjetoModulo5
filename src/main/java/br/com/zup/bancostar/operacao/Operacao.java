@@ -18,6 +18,7 @@ public class Operacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Enumerated(EnumType.STRING)
     private TipoOperacao tipoOperacao;
     private double valor;
     private LocalDateTime dataHoraOperacao;
