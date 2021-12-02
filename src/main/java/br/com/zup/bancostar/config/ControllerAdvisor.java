@@ -64,4 +64,10 @@ public class ControllerAdvisor {
     public MensagemDeErro manipularErroDeContaDesativa(ContaDesativada contaDesativada) {
         return new MensagemDeErro(contaDesativada.getMessage());
     }
+
+    @ExceptionHandler(SaldoInsuficiente.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public MensagemDeErro manipularErroDeSaldoInsuficiente(SaldoInsuficiente saldoInsuficiente) {
+        return new MensagemDeErro(saldoInsuficiente.getMessage());
+    }
 }
