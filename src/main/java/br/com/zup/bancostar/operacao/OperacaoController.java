@@ -1,13 +1,11 @@
 package br.com.zup.bancostar.operacao;
 
 import br.com.zup.bancostar.operacao.dto.EntradaDTO;
+import br.com.zup.bancostar.operacao.dto.ExtratoDTO;
 import br.com.zup.bancostar.operacao.dto.SaidaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 
@@ -29,5 +27,10 @@ public class OperacaoController {
                 SaidaDTO.class);
 
         return saidaDTO;
+    }
+
+    @GetMapping
+    public ExtratoDTO extrato(@RequestParam(name = "idConta") Integer id){
+        return operacaoService.extrato(id);
     }
 }
