@@ -94,9 +94,20 @@ public class OperacaoService {
         return operacaoSalva;
     }
 
+    private Operacao salvarOperacao(TipoOperacao tipoOperacao, double valor, Conta conta){
+        Operacao operacao = new Operacao();
+        operacao.setTipoOperacao(tipoOperacao);
+        operacao.setValor(valor);
+        operacao.setConta(conta);
+        operacao.setDataHoraOperacao(LocalDateTime.now());
+
+        return operacaoRepository.save(operacao);
+    }
+
     private void verificarSaldo(Conta conta, double valorOperacao){
         if (valorOperacao > conta.getValor()){
             throw new SaldoInsuficiente("Saldo insuficiente");
         }
     }
 }
+
