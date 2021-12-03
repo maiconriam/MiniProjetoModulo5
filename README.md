@@ -6,7 +6,6 @@ Mini projeto do estrelas do modulo 5 - Banco STAR 🏦💰
 
 Aplicação que simula uma API de um banco, permitindo o cadastro de usuários e a vinculação destes à contas bancárias que possuem operações de depósito, saque, transferência e consulta de saldo e status da conta.
 
-
 ## Regras de Negócio
 
 - Não deve ser permitido criar uma conta para usuário nao cadastrado;
