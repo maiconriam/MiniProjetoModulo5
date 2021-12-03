@@ -18,7 +18,9 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false)
     private String banco;
+    @Column(nullable = false)
     private double valor;
     private LocalDate dataDeCriacao;
     @OneToOne
