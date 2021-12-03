@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class ContaSaidaDTO {
 
     private String banco;
-    private double valor;
+    private double saldo;
     private LocalDate dataCriacaoConta;
     private Usuario usuario;
 

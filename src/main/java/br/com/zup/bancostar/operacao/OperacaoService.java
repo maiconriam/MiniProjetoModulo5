@@ -80,7 +80,7 @@ public class OperacaoService {
         );
         List<Operacao> operacoes = operacaoRepository.findAllByContaId(id);
         ExtratoDTO extratoDTO = new ExtratoDTO();
-        extratoDTO.setSaldo(conta.getValor());
+        extratoDTO.setSaldo(conta.getSaldo());
         for(Operacao operacao : operacoes){
             extratoDTO.getOperacoes().add(new ExtratoDTO.ExtratoDataDTO(operacao.getTipoOperacao(), operacao.getValor(),
                     operacao.getDataHoraOperacao()));
@@ -99,7 +99,7 @@ public class OperacaoService {
     }
 
     private void verificarSaldo(Conta conta, double valorOperacao){
-        if (valorOperacao > conta.getValor()){
+        if (valorOperacao > conta.getSaldo()){
             throw new SaldoInsuficiente("Saldo insuficiente");
         }
     }

@@ -21,7 +21,7 @@ public class Conta {
     @Column(nullable = false)
     private String banco;
     @Column(nullable = false)
-    private double valor;
+    private double saldo;
     private LocalDate dataDeCriacao;
     @OneToOne
     private Usuario usuario;

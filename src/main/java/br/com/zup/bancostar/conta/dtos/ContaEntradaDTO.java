@@ -19,7 +19,7 @@ public class ContaEntradaDTO {
     private String banco;
     @NotNull(message = "{validacao.obrigatorio}")
     @Positive(message = "{validacao.valor.positivo}")
-    private double valor;
+    private double saldo;
 
 
 }
