@@ -26,7 +26,6 @@ Aplicação que simula uma API de um banco, permitindo o cadastro de usuários e
 - Maven
 - MariaDB/MySQL
 
-
 [Link para instalar o Maven](https://maven.apache.org/download.cgi)
 
 Após instalar as dependencias através do terminal na pasta do projeto voce deve agora ser capaz de iniciar a aplicaçao na IDE. 
@@ -48,4 +47,4 @@ Será possível testar a aplicaçao em: localhost:8080/
 
 ## SERVIÇOS
 
-(Link Swagger)
+Acessar via Swagger, localmente aqui : localhost:8080/swagger-ui.html
