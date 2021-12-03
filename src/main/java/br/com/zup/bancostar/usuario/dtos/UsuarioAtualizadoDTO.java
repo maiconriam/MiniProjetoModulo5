@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @NoArgsConstructor
@@ -21,5 +22,6 @@ public class UsuarioAtualizadoDTO {
     private String email;
     @NotBlank(message = "{validacao.obrigatorio}")
     private String telefone;
+    @NotNull(message = "{validacao.obrigatorio}")
     private Tipo tipo;
 }

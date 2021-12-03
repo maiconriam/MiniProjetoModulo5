@@ -18,8 +18,10 @@ public class Operacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoOperacao tipoOperacao;
+    @Column(nullable = false)
     private double valor;
     private LocalDateTime dataHoraOperacao;
     @ManyToOne

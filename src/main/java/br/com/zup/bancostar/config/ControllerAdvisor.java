@@ -31,8 +31,8 @@ public class ControllerAdvisor {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErroDeValidacao manipularErrosDeValidacao() {
-        return new ErroDeValidacao("Tipo", "Opções: PF ou PJ");
+    public MensagemDeErro manipularErrosDeValidacao() {
+        return new MensagemDeErro("Sintaxe incorreta");
     }
 
     @ExceptionHandler(EmailJaCadastrado.class)

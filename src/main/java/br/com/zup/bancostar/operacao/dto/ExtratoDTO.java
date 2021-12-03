@@ -1,6 +1,7 @@
 package br.com.zup.bancostar.operacao.dto;
 
 import br.com.zup.bancostar.enuns.TipoOperacao;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class ExtratoDTO {
     public static class ExtratoDataDTO{
         private TipoOperacao tipoOperacao;
         private double valor;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime dataHoraOperacao;
     }
 
