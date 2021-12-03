@@ -46,4 +46,9 @@ Será possível testar a aplicaçao em: localhost:8080/
 
 ## SERVIÇOS
 
-Acessar via Swagger, localmente aqui : localhost:8080/swagger-ui.html
+Funcionalidades documentadas via Swagger e Postman Collection.
+
+- Swagger:  localhost:8080/swagger-ui.html 
+
+-Postman collection: [BancoStar.postman_collection.zip](https://github.com/maiconriam/MiniProjetoModulo5/files/7650769/BancoStar.postman_collection.zip)
+
