@@ -56,4 +56,8 @@ public class UsuarioController {
         return modelMapper.map(usuarioAtualizado, UsuarioSaidaDTO.class);
     }
 
+    @PutMapping("/reative/{cpf}")
+    public void reativarUsuario(@PathVariable String cpf) {
+        usuarioService.reativarContaDoUsuario(cpf);
+    }
 }
