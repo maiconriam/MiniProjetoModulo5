@@ -66,4 +66,12 @@ public class UsuarioService {
 
         return usuarioASerAtualizado;
     }
+
+    public Usuario reativarContaDoUsuario(String cpf){
+        Usuario usuario = buscarUsuario(cpf);
+        usuario.setStatus(Status.ATIVO);
+        usuarioRepository.save(usuario);
+
+        return usuario;
+    }
 }
