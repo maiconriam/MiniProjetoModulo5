@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @NoArgsConstructor
@@ -25,7 +26,9 @@ public class UsuarioDTO {
     private String email;
     @NotBlank(message = "{validacao.obrigatorio}")
     private String telefone;
+    @NotNull(message = "{validacao.obrigatorio}")
     private Tipo tipo;
+    @NotNull(message = "{validacao.obrigatorio}")
     private Status status;
 
 }
