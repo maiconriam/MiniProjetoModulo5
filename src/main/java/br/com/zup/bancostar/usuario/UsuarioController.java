@@ -52,8 +52,10 @@ public class UsuarioController {
     public UsuarioSaidaDTO atualizarUsuario(@PathVariable String cpf, @RequestBody @Valid UsuarioAtualizadoDTO
             usuarioAtualizadoDTO) {
         Usuario usuarioAtualizado = modelMapper.map(usuarioAtualizadoDTO, Usuario.class);
+        UsuarioSaidaDTO usuarioSaidaDTO = modelMapper.map(usuarioService.atualizarUsuario(cpf, usuarioAtualizado),
+                UsuarioSaidaDTO.class);
 
-        return modelMapper.map(usuarioAtualizado, UsuarioSaidaDTO.class);
+        return usuarioSaidaDTO;
     }
 
     @PutMapping("/reative/{cpf}")
