@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/operacao")
@@ -19,7 +20,7 @@ public class OperacaoController {
 
     @Transactional
     @PostMapping
-    public SaidaDTO registrarOperacao (@RequestBody EntradaDTO entradaDTO){
+    public SaidaDTO registrarOperacao (@RequestBody @Valid EntradaDTO entradaDTO){
         modelMapper.typeMap(Operacao.class, SaidaDTO.class).addMappings(modelMapper -> modelMapper.map(
                 operacao -> operacao.getConta().getId(),SaidaDTO::setConta));
         SaidaDTO saidaDTO = modelMapper.map(operacaoService.registrarOperacao(entradaDTO.getTipoOperacao(), entradaDTO.getValor(),
