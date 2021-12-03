@@ -1,11 +1,10 @@
 # MiniProjetoModulo5
 
-[![Horusec](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/security-pipeline.yml/badge.svg)](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/security-pipeline.yml) [![Gitleaks](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/gitleaks.yml) [![Super Linter](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/super-linter.yml/badge.svg)](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/super-linter.yml)
+[![Horusec](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/security-pipeline.yml/badge.svg)](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/security-pipeline.yml) [![Gitleaks](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/maiconriam/MiniProjetoModulo5/actions/workflows/gitleaks.yml) 
 
 Mini projeto do estrelas do modulo 5 - Banco STAR
 
 Aplicação que simula uma API de um banco, permitindo o cadastro de usuários e a vinculação destes à contas bancárias que possuem operações de depósito, saque, transferência e consulta de saldo e status da conta.
-
 
 ## Regras de Negócio
 
