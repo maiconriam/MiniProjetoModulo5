@@ -29,7 +29,7 @@ public class UsuarioController {
     public UsuarioSaidaDTO cadastrarUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
 
         UsuarioSaidaDTO usuarioSaidaDTO = modelMapper.map(usuarioDTO, UsuarioSaidaDTO.class);
-        usuarioSaidaDTO.setTipoPessoa(usuarioDTO.getTipo().getNomeTipo());
+        usuarioSaidaDTO.setTipo(usuarioDTO.getTipo().getNomeTipo());
         usuarioSaidaDTO.setStatus(Status.ATIVO);
         Usuario usuario = modelMapper.map(usuarioDTO, Usuario.class);
         usuarioService.salvarUsuario(usuario);

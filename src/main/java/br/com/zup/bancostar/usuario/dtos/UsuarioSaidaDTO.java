@@ -22,7 +22,7 @@ public class UsuarioSaidaDTO {
     private String nome;
     private String email;
     private String telefone;
-    private String tipoPessoa;
+    private String tipo;
     private Status status;
 
 }

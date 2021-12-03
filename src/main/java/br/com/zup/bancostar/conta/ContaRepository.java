@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface ContaRepository extends CrudRepository <Conta, Integer> {
     Optional<Conta> findByUsuarioCpf(String cpf);
     @Modifying
-    @Query("update Conta c set c.valor =  c.valor + :valorOperacao where c.id =  :idConta")
+    @Query("update Conta c set c.saldo =  c.saldo + :valorOperacao where c.id =  :idConta")
     void updateValorConta(@Param("idConta") Integer idConta, @Param("valorOperacao") double valorOperacao);
 }
