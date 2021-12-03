@@ -38,8 +38,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/{cpf}")
-    public Usuario buscarUsuario(@PathVariable String cpf) {
-        return usuarioService.buscarUsuario(cpf);
+    public UsuarioSaidaDTO buscarUsuario(@PathVariable String cpf) {
+        return modelMapper.map(usuarioService.buscarUsuario(cpf), UsuarioSaidaDTO.class) ;
     }
 
     @DeleteMapping("/{cpf}")
@@ -49,11 +49,11 @@ public class UsuarioController {
     }
 
     @PutMapping("/{cpf}")
-    public Usuario atualizarUsuario(@PathVariable String cpf, @RequestBody @Valid UsuarioAtualizadoDTO
+    public UsuarioSaidaDTO atualizarUsuario(@PathVariable String cpf, @RequestBody @Valid UsuarioAtualizadoDTO
             usuarioAtualizadoDTO) {
         Usuario usuarioAtualizado = modelMapper.map(usuarioAtualizadoDTO, Usuario.class);
 
-        return usuarioService.atualizarUsuario(cpf, usuarioAtualizado);
+        return modelMapper.map(usuarioAtualizado, UsuarioSaidaDTO.class);
     }
 
 }
