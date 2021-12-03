@@ -28,10 +28,10 @@ public class OperacaoService {
         if(tipoOperacao.equals(TipoOperacao.DEPOSITO)){
             return this.depositar(valor, conta);
         }
-        else if(tipoOperacao.equals(TipoOperacao.SAQUE)){
+        if(tipoOperacao.equals(TipoOperacao.SAQUE)){
             return this.sacar(valor, conta);
         }
-        else if(tipoOperacao.equals(TipoOperacao.TRANSFERENCIA)){
+        if(tipoOperacao.equals(TipoOperacao.TRANSFERENCIA)){
             return this.transferir(valor, conta, contaDestino);
         }
 
@@ -51,8 +51,8 @@ public class OperacaoService {
         Conta conta = contaService.buscaContaValida(id);
         verificarSaldo(conta, valor);
 
-        Operacao operacaoSalva = this.salvarOperacao(TipoOperacao.SAQUE, valor, conta);
-        contaRepository.updateValorConta(id, operacaoSalva.getValor() * - 1);
+        Operacao operacaoSalva = this.salvarOperacao(TipoOperacao.SAQUE, valor*-1, conta);
+        contaRepository.updateValorConta(id, operacaoSalva.getValor());
 
         return operacaoSalva;
     }
@@ -65,8 +65,8 @@ public class OperacaoService {
             throw new ContaRepetida("Você nao pode transferir para a mesma conta");
         }
 
-        Operacao operacaoOrigemSalva = this.salvarOperacao(TipoOperacao.TRANSFERENCIA, valor, contaOrigem);
-        contaRepository.updateValorConta(idConta, operacaoOrigemSalva.getValor() * - 1);
+        Operacao operacaoOrigemSalva = this.salvarOperacao(TipoOperacao.TRANSFERENCIA, valor*-1, contaOrigem);
+        contaRepository.updateValorConta(idConta, operacaoOrigemSalva.getValor());
 
         Operacao operacaoDestinoSalva = this.salvarOperacao(TipoOperacao.TRANSFERENCIA, valor, contaDestino);
         contaRepository.updateValorConta(idContaDestino, operacaoDestinoSalva.getValor());

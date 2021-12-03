@@ -17,13 +17,17 @@ import javax.validation.constraints.Size;
 public class Usuario {
     @Id
     private String cpf;
+    @Column(nullable = false)
     @Size(min = 4, max = 100, message = "{validacao.nome.size}")
     private String nome;
     @Column(unique = true)
     private String email;
+    @Column(nullable = false)
     private String telefone;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
 }

@@ -1,6 +1,7 @@
 package br.com.zup.bancostar.conta.dtos;
 
 import br.com.zup.bancostar.usuario.Usuario;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +14,6 @@ import java.time.LocalDate;
 @Setter
 public class ContaSaidaDTO {
 
-    @NotNull(message = "{validacao.obrigatorio}")
     private String banco;
     private double valor;
     private LocalDate dataCriacaoConta;

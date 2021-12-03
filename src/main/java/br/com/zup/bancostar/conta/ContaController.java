@@ -32,8 +32,10 @@ public class ContaController {
     }
 
     @PutMapping
-    public Conta vincularUsuario(@RequestBody ContaComUsuarioDTO contaComUsuarioDTO) {
-        return contaService.vincularUsuarioNaConta(contaComUsuarioDTO.getContaId(), contaComUsuarioDTO.getUsuarioId());
+    public ContaSaidaDTO vincularUsuario(@RequestBody @Valid ContaComUsuarioDTO contaComUsuarioDTO) {
+        ContaSaidaDTO contaSaidaDTO = modelMapper.map(contaService.vincularUsuarioNaConta(contaComUsuarioDTO.getContaId()
+                , contaComUsuarioDTO.getUsuarioId()), ContaSaidaDTO.class);
+        return contaSaidaDTO;
     }
 
     @DeleteMapping("/{cpf}")

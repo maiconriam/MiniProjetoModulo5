@@ -1,11 +1,15 @@
 package br.com.zup.bancostar.usuario.dtos;
 
 import br.com.zup.bancostar.enuns.Status;
+import br.com.zup.bancostar.enuns.Tipo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -14,15 +18,9 @@ import javax.validation.constraints.Size;
 @Setter
 @Getter
 public class UsuarioSaidaDTO {
-    @CPF
     private String cpf;
-    @Size(min = 4, max = 100, message = "{validacao.nome.size}")
-    @NotBlank(message = "{validacao.obrigatorio}")
     private String nome;
-    @Email
-    @NotBlank(message = "{validacao.obrigatorio}")
     private String email;
-    @NotBlank(message = "{validacao.obrigatorio}")
     private String telefone;
     private String tipoPessoa;
     private Status status;
